@@ -7,39 +7,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int codigo;
+	private Integer codigo;
 	
 	@Column(length = 50, nullable = false, unique = true)
 	private String nome;
 	
 	@Column(nullable = false)
-	private int quantidade;
+	private Byte quantidade;
 	
 	@Column(nullable = false)
 	private double preco;
 	
 	@Column
 	private LocalDate dataDeValidade;
+	
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Categoria categoria;
 
-	public Produto(int i, String nome, int j, double d, LocalDate dataDeValidade) {
-		super();
-		this.codigo = i;
-		this.nome = nome;
-		this.quantidade = j;
-		this.preco = d;
-		this.dataDeValidade = dataDeValidade;
+	public Produto() {
+		
 	}
 
-	public int getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Short codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 
@@ -51,11 +52,11 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public int getQuantidade() {
+	public Byte getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Short quantidade) {
+	public void setQuantidade(Byte quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -75,56 +76,17 @@ public class Produto {
 		this.dataDeValidade = dataDeValidade;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + codigo;
-		result = prime * result + ((dataDeValidade == null) ? 0 : dataDeValidade.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(preco);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + quantidade;
-		return result;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Produto other = (Produto) obj;
-		if (codigo != other.codigo)
-			return false;
-		if (dataDeValidade == null) {
-			if (other.dataDeValidade != null)
-				return false;
-		} else if (!dataDeValidade.equals(other.dataDeValidade))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (Double.doubleToLongBits(preco) != Double.doubleToLongBits(other.preco))
-			return false;
-		if (quantidade != other.quantidade)
-			return false;
-		return true;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
-	@Override
-	public String toString() {
-		return "Produto [codigo=" + codigo + ", nome=" + nome + ", quantidade=" + quantidade + ", preco=" + preco
-				+ ", dataDeValidade=" + dataDeValidade + "]";
-	}
 
 	
-	
-
 	
 }
+
+	

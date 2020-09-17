@@ -8,8 +8,9 @@ public class ProdutoTests {
 	
 	@Test
 	public void criar() {
-		Produto p = new Produto(1, "Coca cola", 2, 10.5, null);
+		Produto p = new Produto(1, "Coca cola", 2, 10.5, null, null);
 		
+		//System.out.println(p);
 	}
 
 }
